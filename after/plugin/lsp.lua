@@ -75,7 +75,7 @@ require 'lsp_signature'.setup({
     hint_enable = false,
 })
 
-vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle workspace_diagnostics<cr>",
     { silent = true, noremap = true }
 )
 
