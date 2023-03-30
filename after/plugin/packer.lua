@@ -28,12 +28,7 @@ return require('packer').startup(function()
     use("nvim-treesitter/nvim-treesitter-context");
     use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
 
-    use {
-        'lewis6991/gitsigns.nvim',
-        config = function()
-            require('gitsigns').setup()
-        end
-    }
+    use ( 'lewis6991/gitsigns.nvim')
 
     use('neovim/nvim-lspconfig')
     use {

@@ -31,3 +31,5 @@ vim.opt.splitright = true
 vim.opt.cursorline = true
 
 vim.opt.magic = true
+
+vim.opt.ignorecase = true
