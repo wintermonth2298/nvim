@@ -10,7 +10,7 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 -- blackhole paste and delete
-vim.keymap.set("x", "p", [["_dP]])
+vim.keymap.set({ "n", "v" }, "<leader>p", [["_dP]])
 vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 
 -- system clipboard copy
