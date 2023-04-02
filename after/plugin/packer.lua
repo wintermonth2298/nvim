@@ -28,7 +28,7 @@ return require('packer').startup(function()
     use("nvim-treesitter/nvim-treesitter-context");
     use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
 
-    use ( 'lewis6991/gitsigns.nvim')
+    use('lewis6991/gitsigns.nvim')
 
     use('neovim/nvim-lspconfig')
     use {
@@ -69,4 +69,6 @@ return require('packer').startup(function()
     use('ray-x/lsp_signature.nvim')
     use('onsails/lspkind-nvim')
     use({ 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' })
+
+    use { "akinsho/toggleterm.nvim", tag = '*' }
 end)
