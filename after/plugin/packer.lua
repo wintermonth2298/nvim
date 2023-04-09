@@ -77,7 +77,7 @@ return require('packer').startup(function()
         config = function()
             require("lspsaga").setup({
                 ui = {
-                    border = 'solid'
+                    border = 'single'
                 },
                 beacon = {
                     enable = true,
@@ -103,11 +103,13 @@ return require('packer').startup(function()
                     color_mode = true,
                 },
             })
+            -- fix colors
+            vim.cmd [[highlight! FloatBorder guibg=NONE]]
         end,
         requires = {
             { "nvim-tree/nvim-web-devicons" },
             --Please make sure you install markdown and markdown_inline parser
             { "nvim-treesitter/nvim-treesitter" }
-        }
+        },
     })
 end)
