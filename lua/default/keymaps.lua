@@ -52,3 +52,4 @@ vim.keymap.set('v', '<', '<gv')
 vim.cmd [[nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k']]
 vim.cmd [[nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j']]
 
+vim.keymap.set('n', '', ':noh<CR>', { silent = true })
