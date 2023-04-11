@@ -111,6 +111,6 @@ return require('packer').startup(function()
             --Please make sure you install markdown and markdown_inline parser
             { "nvim-treesitter/nvim-treesitter" }
         },
-        use('ggandor/lightspeed.nvim')
+        use('ggandor/leap.nvim')
     })
 end)
