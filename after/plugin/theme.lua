@@ -6,3 +6,7 @@ vim.cmd [[colorscheme gruvbox-material]]
 
 -- for leap
 vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = '#928374' })
+
+vim.cmd [[hi HarpoonBorder guibg=background]]
+vim.cmd [[hi HarpoonWindow guibg=background]]
+
