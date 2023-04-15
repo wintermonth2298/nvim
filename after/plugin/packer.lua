@@ -12,13 +12,6 @@ return require('packer').startup(function()
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
-    use({
-        "folke/trouble.nvim",
-        config = function()
-            require("trouble").setup {}
-        end
-    })
-
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
     use({
         "nvim-treesitter/nvim-treesitter-textobjects",
@@ -69,48 +62,6 @@ return require('packer').startup(function()
     use({ 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' })
     use({ "akinsho/toggleterm.nvim", tag = '*' })
 
-    use({
-        "glepnir/lspsaga.nvim",
-        opt = true,
-        branch = "main",
-        event = "LspAttach",
-        config = function()
-            require("lspsaga").setup({
-                ui = {
-                    border = 'single'
-                },
-                beacon = {
-                    enable = true,
-                    frequency = 13,
-                },
-                diagnostic = {
-                    show_code_action = false,
-                },
-                lightbulb = {
-                    enable = false,
-                    enable_in_insert = false,
-                    sign = false,
-                    virtual_text = false,
-                },
-                symbol_in_winbar = {
-                    enable = true,
-                    separator = "  ",
-                    ignore_patterns = {},
-                    hide_keyword = true,
-                    show_file = true,
-                    folder_level = 2,
-                    respect_root = true,
-                    color_mode = true,
-                },
-            })
-            -- fix colors
-            vim.cmd [[highlight! FloatBorder guibg=NONE]]
-        end,
-        requires = {
-            { "nvim-tree/nvim-web-devicons" },
-            --Please make sure you install markdown and markdown_inline parser
-            { "nvim-treesitter/nvim-treesitter" }
-        },
-        use('ggandor/leap.nvim')
-    })
+    use('ggandor/leap.nvim')
+    use("tpope/vim-fugitive")
 end)

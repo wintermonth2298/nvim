@@ -30,6 +30,7 @@ vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set('n', '<S-q>', ':bd<CR>')
+vim.keymap.set('n', '<C-q>', ':tabclose<CR>')
 
 -- change split size
 vim.keymap.set('n', '<Right>', ':vertical resize +3<CR>')

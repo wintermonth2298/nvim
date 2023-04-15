@@ -1,4 +1,19 @@
-require('telescope').setup()
+require('telescope').setup({
+    defaults = {
+        mappings = {
+            i = {
+                ["<C-j>"] = {
+                    require('telescope.actions').move_selection_next, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+                ["<C-k>"] = {
+                    require('telescope.actions').move_selection_previous, type = "action",
+                    opts = { nowait = true, silent = true }
+                },
+            },
+        },
+    }
+})
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<C-f>', '<cmd>Telescope find_files hidden=true no_ignore=true<cr>', {})

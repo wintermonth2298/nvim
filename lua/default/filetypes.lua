@@ -14,11 +14,12 @@ autocmd('TextYankPost', {
 })
 
 local winte_group = augroup('Winte', {})
-autocmd({ "BufWritePre" }, {
-    group = winte_group,
-    pattern = "*",
-    command = [[%s/\s\+$//e]],
-})
+-- removes marks
+-- autocmd({ "BufWritePre" }, {
+--     group = winte_group,
+--     pattern = "*",
+--     command = [[%s/\s\+$//e]],
+-- })
 autocmd('Filetype', {
     group = winte_group,
     pattern = { 'go' },

@@ -4,6 +4,7 @@ end
 
 require("bufferline").setup {
     options = {
+        mode="tabs",
         diagnostics = "nvim_lsp",
         always_show_bufferline = false,
         separator_style = { '', '' },
@@ -18,7 +19,7 @@ require("bufferline").setup {
     }
 }
 
-map('n', '<A-C-l>', ':BufferLineMoveNext<CR>', { noremap = true, silent = true })
-map('n', '<A-C-h>', ':BufferLineMovePrev<CR>', { noremap = true, silent = true })
+map('n', '<C-l>', ':tabmove +1<CR>', { noremap = true, silent = true })
+map('n', '<C-h>', ':tabmove -1<CR>', { noremap = true, silent = true })
 map('n', '<S-l>', ':BufferLineCycleNext<CR>', { noremap = true, silent = true })
 map('n', '<S-h>', ':BufferLineCyclePrev<CR>', { noremap = true, silent = true })
