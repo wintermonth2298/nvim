@@ -30,15 +30,5 @@ autocmd({ "BufEnter" }, {
     pattern = "*",
     command = [[set fo-=c fo-=r fo-=o]],
 })
-autocmd({ "InsertLeave" }, {
-    group = winte_group,
-    pattern = "*",
-    command = "set nopaste",
-})
-autocmd({ "InsertEnter" }, {
-    group = winte_group,
-    pattern = "*",
-    command = "set paste",
-})
 
 vim.cmd [[au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
