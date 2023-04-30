@@ -1,25 +1,24 @@
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>p', vim.diagnostic.goto_prev)
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>q', builtin.diagnostics)
 
 local on_attach = function(ev)
-    local builtin = require('telescope.builtin')
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
     vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
     vim.keymap.set('n', '<leader>i', builtin.lsp_implementations, opts)
     vim.keymap.set('n', '<leader>ci', builtin.lsp_incoming_calls, opts)
     vim.keymap.set('n', '<leader>co', builtin.lsp_outgoing_calls, opts)
+    vim.keymap.set('n', '<F3>', builtin.lsp_document_symbols, opts)
     vim.keymap.set('n', 'gD', builtin.lsp_type_definitions, opts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>f', function()
         vim.lsp.buf.format { async = true }
     end, opts)

@@ -20,11 +20,11 @@ local winte_group = augroup('Winte', {})
 --     pattern = "*",
 --     command = [[%s/\s\+$//e]],
 -- })
-autocmd('Filetype', {
-    group = winte_group,
-    pattern = { 'go' },
-    command = 'setlocal shiftwidth=8 tabstop=8 softtabstop=8'
-})
+-- autocmd('Filetype', {
+--     group = winte_group,
+--     pattern = { 'go' },
+--     command = 'setlocal shiftwidth=8 tabstop=8 softtabstop=8'
+-- })
 autocmd({ "BufEnter" }, {
     group = winte_group,
     pattern = "*",

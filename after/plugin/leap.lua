@@ -4,7 +4,7 @@
 local leap = require('leap')
 leap.add_default_mappings()
 leap.opts.safe_labels = {}
-leap.opts.case_sensitive = true
+-- leap.opts.case_sensitive = true
 
 -- bidirectional jumps
 -- vim.keymap.set("n", "s", function ()

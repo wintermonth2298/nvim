@@ -9,7 +9,10 @@ return require('packer').startup(function()
     use("theprimeagen/harpoon")
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = {
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-ui-select.nvim' },
+        }
     }
 
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -64,4 +67,9 @@ return require('packer').startup(function()
 
     use('ggandor/leap.nvim')
     use("tpope/vim-fugitive")
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+    use { "bluz71/vim-nightfly-colors", as = "nightfly" }
 end)
