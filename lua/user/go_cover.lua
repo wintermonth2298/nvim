@@ -1,129 +1,121 @@
-local M = {}
-local is_highlight_enabled = false
+local M = {
+    is_highlight_enabled = false,
+    coverage_filename = "/tmp/cover.out",
+    group_covered = "GoCovered",
+    group_not_covered = "GoNotCovered",
+}
 
-function M.open_go_cover_html()
-end
+vim.api.nvim_command('command! GoCov lua require("user.go_cover").toggle_coverage()')
+vim.api.nvim_command('command! GoCovHtml lua require("user.go_cover").open_coverage_in_browser()')
 
-function M.toggle_highlight()
-    is_highlight_enabled = not is_highlight_enabled
-    if is_highlight_enabled then
-        -- Включить подсветку
-        M.run_go_cover()
-    else
-        -- Отключить подсветку
-        local bufnr = vim.api.nvim_get_current_buf()
-        vim.fn.sign_unplace("GoCover", { buffer = bufnr })
-        vim.fn.sign_unplace("GoNotCover", { buffer = bufnr })
-    end
-end
+function M.open_coverage_in_browser()
+    local file_info = M.get_file_info()
+    local create_coverage_file_command = string.format(
+        "go test -covermode=set -coverprofile %s %s",
+        M.coverage_filename,
+        file_info.package_path
+    )
+    local open_html_command = string.format(
+        "go tool cover -html=%s",
+        M.coverage_filename
+    )
 
-function M.open_coverage_html()
-    is_highlight_enabled = true
-
-    local nvim_api = vim.api
-    local bufnr = nvim_api.nvim_get_current_buf()
-
-    -- путь до каталога
-    local filepath = nvim_api.nvim_buf_get_name(bufnr)
-    local package_path = vim.fn.fnamemodify(filepath, ":h")
-
-    local cover_filepath = "/tmp/cover.out"
-    local command = string.format("go test -covermode=set -coverprofile %s %s", cover_filepath, package_path)
-
-    -- Запуск команды в фоновом режиме
-    local job_id = vim.fn.jobstart(command, {
-        on_exit = M.get_open_coverage_html_func(cover_filepath)
+    vim.fn.jobstart(create_coverage_file_command, {
+        on_exit = function()
+            vim.fn.system(open_html_command)
+        end
     })
-
-    -- Проверка на наличие ошибок при запуске команды
-    if job_id <= 0 then
-        print("Failed to start job for command:", command)
-    end
 end
 
-function M.run_go_cover()
-    is_highlight_enabled = true
+function M.toggle_coverage()
+    local file_info = M.get_file_info()
+    if not M.is_highlight_enabled then
+        M.enable_highlighting(file_info)
+    else
+        M.disable_highlighting(file_info.bufnr)
+    end
 
-    local nvim_api = vim.api
-    local bufnr = nvim_api.nvim_get_current_buf()
+    M.is_highlight_enabled = not M.is_highlight_enabled
+end
 
-    -- путь до каталога
-    local filepath = nvim_api.nvim_buf_get_name(bufnr)
+function M.enable_highlighting(file_info)
+    local create_coverage_file_command = string.format(
+        "go test -covermode=set -coverprofile %s %s",
+        M.coverage_filename,
+        file_info.package_path
+    )
+
+    vim.fn.jobstart(create_coverage_file_command, {
+        on_exit = function()
+            local lines_covered, lines_not_covered = M.get_covered_and_not_coverd_lines_for_file(file_info.name)
+            M.highlight_lines_green(file_info.bufnr, lines_covered, M.group_covered)
+            M.highlight_lines_red(file_info.bufnr, lines_not_covered, M.group_not_covered)
+        end
+    })
+end
+
+function M.get_file_info()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local filepath = vim.api.nvim_buf_get_name(bufnr)
     local filename = string.match(filepath, "[^/]*$")
     local package_path = vim.fn.fnamemodify(filepath, ":h")
-
-    local cover_filepath = "/tmp/cover.out"
-    local command = string.format("go test --coverprofile %s %s", cover_filepath, package_path)
-
-    -- Запуск команды в фоновом режиме
-    local job_id = vim.fn.jobstart(command, {
-        on_exit = M.get_highlight_func(bufnr, cover_filepath, filename)
-    })
-
-    -- Проверка на наличие ошибок при запуске команды
-    if job_id <= 0 then
-        print("Failed to start job for command:", command)
-    end
+    return {
+        bufnr = bufnr,
+        name = filename,
+        package_path = package_path,
+    }
 end
 
-function M.process_cover_file(cover_filepath, filename)
-    local f = io.open(cover_filepath, "r")
-    local covered_lines = {}
-    local not_covered = {}
+function M.get_covered_and_not_coverd_lines_for_file(filename)
+    local lines_covered = {}
+    local lines_not_covered = {}
 
-    if f == nil then
-        print("/tmp/cover.out file does not exist")
-        return {}, {}
-    end
+    for line in io.lines(M.coverage_filename) do
+        local filename_from_file, start_idx, end_idx, num_covered = line:match("(.*):(%d+).%d+,(%d+).%d+ %d+ (%d+)")
 
-    for line in f:lines() do
-        local filename_from_file, start_line, end_line, is_covered = line:match("(.*):(%d+).%d+,(%d+).%d+ %d+ (%d+)")
+        if filename_from_file == nil then
+            goto continue
+        end
 
-        if filename_from_file ~= nil and string.find(filename_from_file, filename) then
-            if tonumber(is_covered) <= 0 then
-                for i = start_line, end_line do
-                    table.insert(not_covered, tonumber(i))
-                end
-            else
-                for i = start_line, end_line do
-                    table.insert(covered_lines, tonumber(i))
-                end
+        if not string.find(filename_from_file, filename) then
+            goto continue
+        end
+
+        if tonumber(num_covered) > 0 then
+            for i = start_idx, end_idx do
+                table.insert(lines_covered, tonumber(i))
+            end
+        else
+            for i = start_idx, end_idx do
+                table.insert(lines_not_covered, tonumber(i))
             end
         end
+
+        ::continue::
     end
-    f:close()
-    return covered_lines, not_covered
+    return lines_covered, lines_not_covered
 end
 
-function M.get_open_coverage_html_func(cover_filepath)
-    return function()
-        local command = string.format("go tool cover -html=%s", cover_filepath)
-        vim.fn.system(command)
-    end
-end
-
-function M.get_highlight_func(bufnr, cover_filepath, filename)
-    return function()
-        local covered_lines, not_covered = M.process_cover_file(cover_filepath, filename)
-
-        -- Очистка выделения перед установкой нового
-        vim.fn.sign_unplace("GoCover", { buffer = bufnr })
-        vim.fn.sign_unplace("GoNotCover", { buffer = bufnr })
-
-        -- Здесь мы устанавливаем выделение для покрытых строк
-        vim.fn.sign_define("GoCover", { text = "▋", texthl = "SignColumn", numhl = "" })
-        for _, lnum in ipairs(covered_lines) do
-            vim.fn.sign_place(0, "GoCover", "GoCover", bufnr, { lnum = lnum, priority = 14 })
-        end
-
-        vim.fn.sign_define("GoNotCover", { text = "▋", texthl = "ErrorMsg", numhl = "" })
-        for _, lnum in ipairs(not_covered) do
-            vim.fn.sign_place(0, "GoNotCover", "GoNotCover", bufnr, { lnum = lnum, priority = 14 })
-        end
+function M.disable_highlighting(bufnr)
+    for _, group in ipairs({ M.group_covered, M.group_not_covered }) do
+        vim.fn.sign_unplace(group, { buffer = bufnr })
     end
 end
 
-vim.api.nvim_command('command! GoCov lua require("user.go_cover").toggle_highlight()')
-vim.api.nvim_command('command! GoCovHtml lua require("user.go_cover").open_coverage_html()')
+function M.highlight_lines_red(bufnr, lines, group)
+    vim.fn.sign_define(group, { text = "▋", texthl = "ErrorMsg", numhl = "" })
+    M.highlight_lines(bufnr, lines, group)
+end
+
+function M.highlight_lines_green(bufnr, lines, group)
+    vim.fn.sign_define(group, { text = "▋", texthl = "SignColumn", numhl = "" })
+    M.highlight_lines(bufnr, lines, group)
+end
+
+function M.highlight_lines(bufnr, lines, group)
+    for _, line in ipairs(lines) do
+        vim.fn.sign_place(0, group, group, bufnr, { lnum = line, priority = 14 })
+    end
+end
 
 return M
