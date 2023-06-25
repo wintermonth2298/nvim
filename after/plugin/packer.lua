@@ -72,4 +72,6 @@ return require('packer').startup(function()
         config = function() require("nvim-autopairs").setup {} end
     }
     use { "bluz71/vim-nightfly-colors", as = "nightfly" }
+    use { "folke/neodev.nvim" }
+    use { "catppuccin/nvim", as = "catppuccin" }
 end)

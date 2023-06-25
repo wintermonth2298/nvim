@@ -11,5 +11,5 @@
 -- vim.cmd [[hi HarpoonWindow guibg=background]]
 --
 
-vim.cmd [[colorscheme nightfly]]
+vim.cmd [[colorscheme catppuccin-macchiato]]
 -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = '#928374' })
