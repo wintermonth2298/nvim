@@ -22,10 +22,10 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set("n", "Q", "<nop>")
 
 -- quickfix movings
--- vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz")
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
+vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
+vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
