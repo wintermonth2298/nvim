@@ -8,7 +8,7 @@ return require('packer').startup(function()
     use('sainnhe/gruvbox-material')
     use("theprimeagen/harpoon")
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.2',
         requires = {
             { 'nvim-lua/plenary.nvim' },
             { 'nvim-telescope/telescope-ui-select.nvim' },
