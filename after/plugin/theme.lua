@@ -10,6 +10,9 @@
 -- vim.cmd [[hi HarpoonBorder guibg=background]]
 -- vim.cmd [[hi HarpoonWindow guibg=background]]
 --
+require("catppuccin").setup({
+    no_italic = true,
+})
 
 vim.cmd [[colorscheme catppuccin-macchiato]]
 -- vim.api.nvim_set_hl(0, 'LeapBackdrop', { fg = '#928374' })
