@@ -41,3 +41,4 @@ vim.keymap.set('n', '<C-f>', '<cmd>Telescope find_files hidden=true no_ignore=tr
 vim.keymap.set('n', '<C-p>', '<cmd>Telescope git_files hidden=true no_ignore=true<cr>', {})
 vim.keymap.set('n', '<leader>b', '<cmd>Telescope buffers<cr>', {})
 vim.keymap.set('n', '<leader>g', '<cmd>Telescope live_grep<cr>', {})
+vim.keymap.set("n", "<leader>l", '<cmd> Telescope resume<cr>', {})
