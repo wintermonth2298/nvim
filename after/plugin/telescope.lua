@@ -14,6 +14,8 @@ require('telescope').setup({
         }
     },
     defaults = {
+        layout_config = { height = 0.97, width = 0.97 },
+        dynamic_preview_title = true,
         mappings = {
             i = {
                 ["<Down>"] = { require('telescope.actions').cycle_history_next, type = "action",
