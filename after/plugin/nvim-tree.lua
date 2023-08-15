@@ -86,12 +86,6 @@ require 'nvim-tree'.setup {
     disable_netrw = true,
     view = {
         adaptive_size = true,
-        mappings = {
-            list = {
-                { key = { "l", "<2-LeftMouse>" }, action = "edit" },
-                { key = { "o", "<Tab>" },         action = "preview" },
-            }
-        }
     }
 }
 
