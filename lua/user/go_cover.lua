@@ -108,7 +108,7 @@ function M.highlight_lines_red(bufnr, lines, group)
 end
 
 function M.highlight_lines_green(bufnr, lines, group)
-    vim.fn.sign_define(group, { text = "▋", texthl = "SignColumn", numhl = "" })
+    vim.fn.sign_define(group, { text = "▋", texthl = "RainbowDelimiterGreen", numhl = "" })
     M.highlight_lines(bufnr, lines, group)
 end
 
