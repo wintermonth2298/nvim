@@ -15,7 +15,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 5
+vim.opt.scrolloff = 5000
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
@@ -33,3 +33,5 @@ vim.opt.cursorline = true
 vim.opt.magic = true
 
 vim.opt.ignorecase = true
+
+vim.opt.fillchars:append { diff = " " }
