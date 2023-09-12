@@ -59,7 +59,10 @@ return require('packer').startup(function()
         run = function() vim.fn["mkdp#util#install"]() end,
     })
 
-    use('ray-x/go.nvim')
+    use {
+        'ray-x/go.nvim',
+        requires = { "ray-x/guihua.lua" },
+    }
     use('ray-x/lsp_signature.nvim')
     use('onsails/lspkind-nvim')
     use({ 'akinsho/bufferline.nvim', tag = "v3.*", requires = 'kyazdani42/nvim-web-devicons' })

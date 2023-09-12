@@ -51,9 +51,22 @@ lspconfig['lua_ls'].setup {
 }
 
 require('go').setup({
+    goimport="goimports",
+    max_line_len = 190,
+    lsp_gofumpt = true,
+    run_in_floaterm = true,
     lsp_cfg = {
         capabilities = capabilities,
-        on_attach = on_attach
+        on_attach = on_attach,
+        settings = {
+            staticcheck = true,
+            gopls = {
+                analyses = {
+                    ST1003 = false,
+                    SA1019 = true,
+                },
+            },
+        },
     },
     dap_debug = false,
     lsp_inlay_hints = {
@@ -65,8 +78,7 @@ require('go').setup({
 vim.api.nvim_create_autocmd('BufWritePre', {
     pattern = '*.go',
     callback = function()
-        require('go.format').gofmt()
-        vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
+        require('go.format').goimport()
     end
 })
 
@@ -87,7 +99,7 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics, {
         underline = true,
-        update_in_insert = true,
+        update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
     }
