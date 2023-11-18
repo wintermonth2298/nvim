@@ -19,4 +19,13 @@ return {
         { "<F2>", ":Neotree toggle reveal_force_cwd<cr>" },
         { "<F3>", ":Neotree toggle git_status<cr>" },
     },
+    config = function(_, opts)
+        require("neo-tree").setup(opts)
+        vim.api.nvim_create_autocmd("BufWritePost", {
+            group = vim.api.nvim_create_augroup("UpdateNeoTreeOnSave", { clear = true }),
+            callback = function()
+                require("neo-tree.events").fire_event("git_event")
+            end,
+        })
+    end
 }

@@ -5,5 +5,8 @@ return {
         shade_terminals = false,
         terminal_mappings = true,
         direction = 'float',
+        on_close = function()
+            require("neo-tree.events").fire_event("git_event")
+        end
     }
 }
