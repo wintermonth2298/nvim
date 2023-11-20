@@ -17,7 +17,7 @@ return {
 
         -- Define your formatters
         formatters_by_ft = {
-            go = { "goimports", "gofmt" },
+            go = { "goimports", "gofmt", "golines" },
             lua = { "stylua" },
             python = { "isort", "black" },
             javascript = { { "prettierd", "prettier" } },
@@ -26,9 +26,9 @@ return {
         format_on_save = { timeout_ms = 500, lsp_fallback = true },
         -- Customize formatters
         formatters = {
-            shfmt = {
-                prepend_args = { "-i", "2" },
-            },
+            golines = {
+                prepend_args = { "-m", "130" },
+            }
         },
     },
     init = function()

@@ -22,7 +22,7 @@ return {
             vim.keymap.set('n', '<leader>i', builtin.lsp_implementations, opts)
             vim.keymap.set('n', '<leader>ci', builtin.lsp_incoming_calls, opts)
             vim.keymap.set('n', '<leader>co', builtin.lsp_outgoing_calls, opts)
-            -- vim.keymap.set('n', '<F3>', builtin.lsp_document_symbols, opts)
+            vim.keymap.set('n', '<F5>', builtin.lsp_document_symbols, opts)
             vim.keymap.set('n', 'gD', builtin.lsp_type_definitions, opts)
             vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
             vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
