@@ -8,6 +8,7 @@ return {
             { "<leader>b", "<cmd>Telescope buffers<cr>" },
             { "<leader>g", "<cmd>Telescope live_grep<cr>" },
             { "<leader>l", "<cmd>Telescope resume<cr>" },
+            { "<leader>r", "<cmd>Telescope registers<cr>" },
         }
     end,
     opts = {
