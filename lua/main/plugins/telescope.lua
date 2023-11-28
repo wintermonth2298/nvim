@@ -8,7 +8,7 @@ return {
             { "<leader>b", "<cmd>Telescope buffers<cr>" },
             { "<leader>g", "<cmd>Telescope live_grep<cr>" },
             { "<leader>l", "<cmd>Telescope resume<cr>" },
-            { "<leader>r", "<cmd>Telescope registers<cr>" },
+            { "<leader>'", "<cmd>Telescope registers<cr>" },
         }
     end,
     opts = {
@@ -18,13 +18,6 @@ return {
             },
         },
         defaults = {
-            pickers = {
-                live_grep = {
-                    mappings = {
-                        i = { ["<c-f>"] = require("telescope.actions").to_fuzzy_refine },
-                    },
-                },
-            },
             layout_config = { height = 0.95, width = 0.95 },
             dynamic_preview_title = true,
             mappings = {
@@ -46,6 +39,11 @@ return {
                     },
                     ["<C-k>"] = {
                         require("telescope.actions").move_selection_previous,
+                        type = "action",
+                        opts = { nowait = true, silent = true },
+                    },
+                    ["<C-f>"] = {
+                        require("telescope.actions").to_fuzzy_refine,
                         type = "action",
                         opts = { nowait = true, silent = true },
                     },
