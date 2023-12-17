@@ -12,6 +12,7 @@ return {
         { 'onsails/lspkind-nvim' },
     },
     config = function()
+        local lspkind = require('lspkind')
         local cmp = require 'cmp'
         cmp.setup({
             snippet = {
@@ -28,32 +29,29 @@ return {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'buffer' },
-            })
+            }),
+            formatting = {
+                expandable_indicator = false,
+                fields = { "abbr", "kind", "menu" },
+                format = lspkind.cmp_format({
+                    maxwidth = 50,
+                })
+            }
         })
 
         cmp.setup.cmdline('/', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
-                { name = 'buffer' }
+                name = 'buffer',
             }
         })
 
         cmp.setup.cmdline(':', {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = 'path' }
-            }, {
+                { name = 'path' },
                 { name = 'cmdline' }
             })
         })
-
-        local lspkind = require('lspkind')
-        cmp.setup {
-            formatting = {
-                format = lspkind.cmp_format({
-                    maxwidth = 50,
-                })
-            }
-        }
     end
 }
