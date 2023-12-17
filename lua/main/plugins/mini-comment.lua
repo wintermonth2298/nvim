@@ -1,6 +1,4 @@
 return {
-    {
-        "echasnovski/mini.comment",
-        opts = {},
-    }
+    "echasnovski/mini.comment",
+    opts = {},
 }
