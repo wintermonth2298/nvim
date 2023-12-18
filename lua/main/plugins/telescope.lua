@@ -1,6 +1,9 @@
 return {
     "nvim-telescope/telescope.nvim",
-    dependencies = { "nvim-telescope/telescope-ui-select.nvim" },
+    dependencies = {
+        "nvim-telescope/telescope-ui-select.nvim",
+        "tom-anders/telescope-vim-bookmarks.nvim"
+    },
     keys = function()
         return {
             { "<C-f>",     "<cmd>Telescope find_files hidden=true no_ignore=true<cr>" },
@@ -9,6 +12,7 @@ return {
             { "<leader>g", "<cmd>Telescope live_grep<cr>" },
             { "<leader>l", "<cmd>Telescope resume<cr>" },
             { "<leader>'", "<cmd>Telescope registers<cr>" },
+            { '<leader>m', require('telescope').extensions.vim_bookmarks.all, }
         }
     end,
     opts = {
@@ -51,4 +55,8 @@ return {
             },
         },
     },
+    config = function(_, opts)
+        require("telescope").setup(opts)
+        require('telescope').load_extension('vim_bookmarks')
+    end
 }
