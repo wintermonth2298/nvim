@@ -9,7 +9,7 @@ return {
             { "<C-f>",     "<cmd>Telescope find_files hidden=true no_ignore=true<cr>" },
             { "<C-p>",     "<cmd>Telescope git_files hidden=true no_ignore=true<cr>" },
             { "<leader>b", "<cmd>Telescope buffers<cr>" },
-            { "<leader>g", "<cmd>Telescope live_grep<cr>" },
+            { "<leader>g", "<cmd>Telescope live_grep use_less=true<cr>" },
             { "<leader>l", "<cmd>Telescope resume<cr>" },
             { "<leader>'", "<cmd>Telescope registers<cr>" },
             { '<leader>m', require('telescope').extensions.vim_bookmarks.all, }
