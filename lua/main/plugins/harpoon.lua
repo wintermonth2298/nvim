@@ -20,6 +20,10 @@ return {
             { "<leader>2", function() ui.nav_file(2) end },
             { "<leader>3", function() ui.nav_file(3) end },
             { "<leader>4", function() ui.nav_file(4) end },
+            { "<leader>5", function() ui.nav_file(5) end },
+            { "<leader>6", function() ui.nav_file(6) end },
+            { "<leader>7", function() ui.nav_file(7) end },
+            { "<leader>8", function() ui.nav_file(8) end },
         }
     end
 }
