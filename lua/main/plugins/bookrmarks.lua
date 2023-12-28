@@ -5,6 +5,7 @@ return {
     dependencies = { 'nvim-web-devicons' },
     opts = {
         keymap = {
+            toggle = "m<tab>",
             add = "mm",
             delete_on_virt = "md",
             show_desc = "mk",
