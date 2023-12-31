@@ -32,6 +32,7 @@ return {
                 quit_on_open = true,
             },
         },
+        sync_root_with_cwd = true,
         diagnostics = {
             enable = true,
             show_on_dirs = true,
