@@ -27,8 +27,6 @@ vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")
 vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>")
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
 vim.keymap.set('n', '<S-q>', ':bd<CR>')
 vim.keymap.set('n', '<C-q>', ':tabclose<CR>')
 
