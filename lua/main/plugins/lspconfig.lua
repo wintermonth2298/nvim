@@ -7,6 +7,8 @@ return {
     },
     event = { "BufReadPost", "BufReadPre", "BufNewFile" },
     config = function(_, _)
+        require("neodev").setup({})
+
         local lspconfig = require('lspconfig')
 
         local builtin = require('telescope.builtin')
@@ -44,7 +46,6 @@ return {
             on_attach = on_attach,
         }
 
-        require("neodev").setup({})
         lspconfig['lua_ls'].setup {
             capabilities = capabilities,
             on_attach = on_attach,
