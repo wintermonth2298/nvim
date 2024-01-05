@@ -6,14 +6,14 @@ return {
     },
     keys = function()
         return {
-            { "<C-f>",     "<cmd>Telescope find_files hidden=true no_ignore=true<cr>" },
-            { "<C-p>",     "<cmd>Telescope git_files hidden=true no_ignore=true<cr>" },
-            { "<leader>b", "<cmd>Telescope buffers<cr>" },
-            { "<leader>g", "<cmd>Telescope live_grep use_less=true<cr>" },
-            { "<leader>l", "<cmd>Telescope resume<cr>" },
-            { "<leader>'", "<cmd>Telescope registers<cr>" },
-            { '<leader>m', "<cmd>Telescope bookmarks<cr>" },
-            { '<leader>:', "<cmd>Telescope commands<cr>" },
+            { "<leader>tF", "<cmd>Telescope find_files hidden=true no_ignore=true<cr>" },
+            { "<leader>tf", "<cmd>Telescope git_files hidden=true no_ignore=true<cr>" },
+            { "<leader>tb", "<cmd>Telescope buffers<cr>" },
+            { "<leader>tg", "<cmd>Telescope live_grep use_less=true<cr>" },
+            { "<leader>tl", "<cmd>Telescope resume<cr>" },
+            { "<leader>t'", "<cmd>Telescope registers<cr>" },
+            { '<leader>tm', "<cmd>Telescope bookmarks<cr>" },
+            { '<leader>t:', "<cmd>Telescope commands<cr>" },
         }
     end,
     opts = {
