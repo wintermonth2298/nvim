@@ -12,7 +12,8 @@ return {
             { "<leader>g", "<cmd>Telescope live_grep use_less=true<cr>" },
             { "<leader>l", "<cmd>Telescope resume<cr>" },
             { "<leader>'", "<cmd>Telescope registers<cr>" },
-            { '<leader>m', "<cmd>Telescope bookmarks<cr>" }
+            { '<leader>m', "<cmd>Telescope bookmarks<cr>" },
+            { '<leader>:', "<cmd>Telescope commands<cr>" },
         }
     end,
     opts = {
