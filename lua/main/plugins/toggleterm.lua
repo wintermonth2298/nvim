@@ -5,5 +5,6 @@ return {
         shade_terminals = false,
         terminal_mappings = true,
         direction = 'float',
+        autochdir = true,
     }
 }

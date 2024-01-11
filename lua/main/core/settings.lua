@@ -9,6 +9,7 @@ vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
+vim.opt.wrap = false
 
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
