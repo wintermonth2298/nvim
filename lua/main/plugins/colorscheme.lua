@@ -18,6 +18,8 @@ return {
             mason = true,
             markdown = true,
             mini = true,
+            which_key = true,
+            harpoon = true,
             native_lsp = {
                 enabled = true,
                 underlines = {
@@ -29,15 +31,18 @@ return {
             },
             navic = { enabled = true, custom_bg = "lualine" },
             neotest = true,
-            neotree = true,
+            nvimtree = true,
             semantic_tokens = true,
-            telescope = true,
+            telescope = {
+                enabled = true,
+                style = "nvchad"
+            },
             treesitter = true,
             treesitter_context = true,
         },
     },
     config = function(_, opts)
         require("catppuccin").setup(opts)
-        vim.cmd [[colorscheme catppuccin-macchiato]]
+        vim.cmd [[colorscheme catppuccin]]
     end
 }
