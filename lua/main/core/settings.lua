@@ -36,3 +36,7 @@ vim.opt.magic = true
 vim.opt.ignorecase = true
 
 vim.opt.fillchars:append { diff = " " }
+
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
