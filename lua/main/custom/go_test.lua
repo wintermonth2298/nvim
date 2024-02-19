@@ -8,7 +8,6 @@ vim.api.nvim_create_user_command('GoTestF',
 )
 
 local toggleterm = require("toggleterm")
-local ts_utils = require('nvim-treesitter.ts_utils')
 
 function M.test_func(args)
     local file_info = M.get_file_info()
@@ -43,7 +42,7 @@ function M.parse_args(args)
 end
 
 function M.get_current_function_name()
-    local current_node = ts_utils.get_node_at_cursor()
+    local current_node = vim.treesitter.get_node()
     if not current_node then return "" end
     local expr = current_node
 
@@ -56,7 +55,8 @@ function M.get_current_function_name()
 
     if not expr then return "" end
 
-    return (ts_utils.get_node_text(expr:child(1)))[1]
+    local bufnr = vim.api.nvim_get_current_buf()
+    return vim.treesitter.get_node_text(expr:child(1), bufnr)
 end
 
 function M.get_file_info()

@@ -7,42 +7,44 @@ vim.api.nvim_create_user_command('GoAddTest',
     { nargs = 0 }
 )
 
-local ts_utils = require('nvim-treesitter.ts_utils')
-
 function M.add_func_test()
     local file_info = M.get_file_info()
     local function_name = M.get_current_function_name()
 
     local command = M.create_gotest_command(file_info.package_path, function_name)
     vim.cmd(command)
+
+    local current_dir = vim.fn.expand('%:p:h')
+    local new_file = current_dir .. '/' .. file_info.name:gsub(".go", "") .. "_test.go"
+    vim.cmd(":silent edit " .. new_file)
 end
 
 function M.create_gotest_command(package_path, function_name)
-    local command = string.format("!gotests -w -only %s %s", function_name, package_path)
+    local command = string.format(":silent !gotests -w -only %s %s", function_name, package_path)
     return command
 end
 
 function M.get_current_function_name()
-    local current_node = ts_utils.get_node_at_cursor()
+    local current_node = vim.treesitter.get_node()
     if not current_node then return "" end
     local expr = current_node
 
-    local function_expr = {}
     while expr do
         if expr:type() == 'function_declaration' or expr:type() == 'method_declaration' then
-            function_expr = expr
+            break
         end
         expr = expr:parent()
     end
 
-    if not function_expr then return "" end
+    if not expr then return "" end
 
-    if function_expr:type() == 'function_declaration' then
-        return ts_utils.get_node_text(function_expr:child(1))[1]
+    local bufnr = vim.api.nvim_get_current_buf()
+    if expr:type() == 'function_declaration' then
+        return vim.treesitter.get_node_text(expr:child(1), bufnr)
     end
 
-    if function_expr:type() == "method_declaration" then
-        return ts_utils.get_node_text(function_expr:child(2))[1]
+    if expr:type() == "method_declaration" then
+        return vim.treesitter.get_node_text(expr:child(2), bufnr)
     end
 end
 
