@@ -22,6 +22,7 @@ return {
     opts = function()
         local fb_actions = require("telescope._extensions.file_browser.actions")
         local actions = require("telescope.actions")
+        local actions_set = require("telescope.actions.set")
         return {
             extensions = {
                 ["ui-select"] = {
@@ -60,6 +61,14 @@ return {
                 },
                 dynamic_preview_title = true,
                 mappings = {
+                    n = {
+                        ["<C-d>"] = function(buf)
+                            actions_set.shift_selection(buf, 10)
+                        end,
+                        ["<C-u>"] = function(buf)
+                            actions_set.shift_selection(buf, -10)
+                        end
+                    },
                     i = {
                         ["<Down>"] = {
                             actions.cycle_history_next,
