@@ -40,3 +40,6 @@ vim.opt.fillchars:append { diff = " " }
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
