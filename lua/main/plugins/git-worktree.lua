@@ -2,7 +2,7 @@ return {
     "ThePrimeagen/git-worktree.nvim",
     opts = {
         change_directory_command = "lcd",
-        update_on_change = false,
+        update_on_change = true,
     },
     keys = function()
         return {

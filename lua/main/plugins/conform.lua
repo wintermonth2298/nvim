@@ -28,6 +28,21 @@ return {
         formatters = {
             golines = {
                 prepend_args = { "-m", "130" },
+            },
+            goimports = {
+                prepend_args = function(self, _)
+                    if vim.fn.executable("go") ~= 1 then
+                        return
+                    end
+
+                    local module = vim.fn.trim(vim.fn.system("go list -m"))
+                    if vim.v.shell_error ~= 0 then
+                        return
+                    end
+                    module = module:gsub("\n", ",")
+
+                    return { "-local", module }
+                end
             }
         },
     },

@@ -1,4 +1,5 @@
 return {
+    lazy = false,
     "nvim-telescope/telescope.nvim",
     dependencies = {
         "nvim-telescope/telescope-ui-select.nvim",
@@ -29,7 +30,9 @@ return {
                     require("telescope.themes"),
                 },
                 ["file_browser"] = {
-                    hijack_netrw = true,
+                    hide_parent_dir = true,
+                    hijack_netrw = false,
+                    grouped = true,
                     mappings = {
                         ["i"] = {
                             ["<A-y>"] = false,
