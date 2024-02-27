@@ -17,10 +17,11 @@ function M.add_func_test()
     local current_dir = vim.fn.expand('%:p:h')
     local new_file = current_dir .. '/' .. file_info.name:gsub(".go", "") .. "_test.go"
     vim.cmd(":silent edit " .. new_file)
+    vim.cmd(":silent norm G{j")
 end
 
 function M.create_gotest_command(package_path, function_name)
-    local command = string.format(":silent !gotests -w -only %s %s", function_name, package_path)
+    local command = string.format(":silent !gotests -parallel -w -only %s %s", function_name, package_path)
     return command
 end
 
