@@ -21,7 +21,7 @@ function M.add_func_test()
 end
 
 function M.create_gotest_command(package_path, function_name)
-    local command = string.format(":silent !gotests -parallel -w -only %s %s", function_name, package_path)
+    local command = string.format(":silent !gotests -parallel -w -only ^%s$ %s", function_name, package_path)
     return command
 end
 
