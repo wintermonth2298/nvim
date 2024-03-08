@@ -21,7 +21,26 @@ return {
             local opts = { buffer = ev.buf }
             vim.keymap.set('n', 'gd', builtin.lsp_definitions, opts)
             vim.keymap.set('n', 'gr', builtin.lsp_references, opts)
+            vim.keymap.set('n', 'gR',
+                function()
+                    local ignore_pattern = vim.fn.input("Ignore files > ")
+                    if ignore_pattern == "" then
+                        return
+                    end
+                    builtin.lsp_references({ file_ignore_patterns = { ignore_pattern } })
+                end,
+                opts
+            )
             vim.keymap.set('n', '<leader>i', builtin.lsp_implementations, opts)
+            vim.keymap.set('n', '<leader>I',
+                function()
+                    local ignore_pattern = vim.fn.input("Ignore files > ")
+                    if ignore_pattern == "" then
+                        return
+                    end
+                    builtin.lsp_implementations({ file_ignore_patterns = { ignore_pattern } })
+                end,
+                opts)
             vim.keymap.set('n', '<leader>ci', builtin.lsp_incoming_calls, opts)
             vim.keymap.set('n', '<leader>co', builtin.lsp_outgoing_calls, opts)
             vim.keymap.set('n', '<F5>', builtin.lsp_document_symbols, opts)
