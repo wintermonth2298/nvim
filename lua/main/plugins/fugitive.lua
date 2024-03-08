@@ -26,6 +26,7 @@ local function toggle()
 end
 
 return {
+    lazy = false,
     "tpope/vim-fugitive",
     keys = function()
         return {
