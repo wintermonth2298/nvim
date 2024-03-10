@@ -18,6 +18,7 @@ return {
             { '<F1>',       "<cmd>Telescope file_browser<cr>" },
             { '<F2>',       "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>" },
             { '<leader>t:', "<cmd>Telescope commands<cr>" },
+            { '<leader>t/', "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
         }
     end,
     opts = function()
