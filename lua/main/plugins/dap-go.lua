@@ -1,3 +1,17 @@
+local function select_cmd()
+    local base_path = vim.fn.getcwd() .. "/cmd/"
+    local file_path = vim.fn.input({
+        prompt = "path: ",
+        default = base_path,
+        completion = "file",
+    })
+    if file_path and file_path ~= "" then
+        return file_path
+    else
+        return nil
+    end
+end
+
 return {
     lazy = false,
     'leoluz/nvim-dap-go',
@@ -8,7 +22,18 @@ return {
     },
     config = function()
         require("dapui").setup()
-        require("dap-go").setup()
+        require("dap-go").setup({
+            dap_configurations = {
+                {
+                    type = "go",
+                    name = "Custom cmd select",
+                    request = "launch",
+                    program = select_cmd,
+                    args = { "--local-config-enabled" },
+                },
+            }
+        })
+
         require("nvim-dap-virtual-text").setup({
             commented = false,
         })
