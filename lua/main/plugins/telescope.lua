@@ -34,6 +34,7 @@ return {
                     hide_parent_dir = true,
                     hijack_netrw = false,
                     grouped = true,
+                    hidden = true,
                     mappings = {
                         ["i"] = {
                             ["<A-y>"] = false,
@@ -45,11 +46,14 @@ return {
                             ["<C-o>"] = fb_actions.open,
                             ["<C-g>"] = fb_actions.goto_parent_dir,
                             ["<C-w>"] = function() vim.cmd('normal vbd') end,
-                            ["<C-t>"] = fb_actions.change_cwd,
                             ["<C-f>"] = fb_actions.toggle_browser,
                             ["<C-h>"] = fb_actions.toggle_hidden,
+                            ["<C-t>"] = actions.select_tab,
                             ["<bs>"] = fb_actions.backspace,
                         },
+                        ["n"] = {
+                            ["<bs>"] = fb_actions.backspace
+                        }
                     },
                 },
             },

@@ -1,5 +1,6 @@
 return {
     "akinsho/bufferline.nvim",
+    lazy = false,
     keys = function()
         return {
             { "<S-l>", ":BufferLineCycleNext<CR>", silent = true },
