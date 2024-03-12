@@ -22,7 +22,7 @@ return {
             },
             mapping = cmp.mapping.preset.insert({
                 ["<C-l>"] = cmp.mapping.confirm(),
-                ['<C-h>'] = cmp.mapping.abort()
+                ['<C-h>'] = cmp.mapping.abort(),
             }),
             sources = cmp.config.sources({
                 { name = "path" },
@@ -47,7 +47,10 @@ return {
         })
 
         cmp.setup.cmdline(':', {
-            mapping = cmp.mapping.preset.cmdline(),
+            mapping = cmp.mapping.preset.cmdline({
+                ['<Tab>'] = cmp.mapping.select_next_item(),
+                ['<S-Tab>'] = cmp.mapping.select_next_item(),
+            }),
             sources = cmp.config.sources({
                 { name = 'path' },
                 { name = 'cmdline' }
