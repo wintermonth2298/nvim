@@ -1,15 +1,19 @@
 local function select_cmd()
-    local base_path = vim.fn.getcwd() .. "/cmd/"
-    local file_path = vim.fn.input({
-        prompt = "path: ",
-        default = base_path,
-        completion = "file",
-    })
-    if file_path and file_path ~= "" then
-        return file_path
-    else
-        return nil
+    local base_path = vim.fn.getcwd() .. "/cmd"
+    local entrypoints = vim.fn.split(vim.fn.glob(base_path .. "/*"), "\n")
+    local numbered_entrypoints = { "Select a command:" }
+
+    for i, entrypoint in ipairs(entrypoints) do
+        table.insert(numbered_entrypoints, string.format("%d. %s", i, entrypoint))
     end
+
+    if #entrypoints == 1 then
+        return entrypoints[1]
+    end
+
+    local choice = vim.fn.inputlist(numbered_entrypoints)
+
+    return entrypoints[choice]
 end
 
 return {
